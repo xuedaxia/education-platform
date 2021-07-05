@@ -1,5 +1,14 @@
 <template>
   <div :class="classObj" class="app-wrapper">
+    <el-header>
+      <div class="logo">
+         <img src="./logo3.png" alt />
+        <span >在线教育平台</span>
+       
+      </div>
+      <!-- <el-button type="info" @click="logout">退出</el-button> -->
+    </el-header>
+    <!-- <div class="header"></div> -->
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <sidebar class="sidebar-container" />
     <div class="main-container">
@@ -90,4 +99,38 @@ export default {
   .mobile .fixed-header {
     width: 100%;
   }
+  .sidebar-container{
+    // top: 100px!important;
+  }
+  .header{
+    height:100px;
+    background-color: #888888!important;
+  }
+  .logo {
+  height: 90px;
+  width: auto;
+  // padding-top: 15px;
+  img {
+    height: 70px;
+    width: 70px;
+    margin-left: 190px;
+  }
+  }
+  .el-header {
+  background-color: rgb(60, 104, 224);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-size: 20px;
+  > div {
+    display: flex;
+    align-items: center;
+    span {
+      margin-left: 20px;
+      padding-bottom: 10px;
+    }
+  }
+}
+
 </style>

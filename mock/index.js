@@ -1,12 +1,63 @@
 const Mock = require('mockjs')
 const { param2Obj } = require('./utils')
 
+const teacher = require('./teacher/teacher')
 const user = require('./user')
 const table = require('./table')
+const teacherAdd=require('./teacher/teacherAdd')
+const teacherInfoGet=require('./teacher/teacherInfoGet')
+const teacherUpdate=require('./teacher/teacherUpdate')
+const avater=require('./teacher/avater')
+const subjectAdd=require('./teacher/subjectAdd')
+const subjectListGet=require('./teacher/subjectListGet')
+const courseInfoAdd=require('./teacher/courseInfoAdd')
+const findAll = require('./teacher/findAll')
+const allChapterVideoGet=require('./teacher/allChapterVideoGet')
+const courseInfoIdGet=require('./teacher/courseInfoIdGet')
+const courseInfoUpdate=require('./teacher/courseInfoUpdate')
+const chapterAdd=require('./teacher/chapterAdd')
+const chapterGet=require('./teacher/chapterGet')
+const chapterUpdate=require('./teacher/chapterUpdate')
+const chapterDelete=require('./teacher/chapteDelete')
+const videoAdd = require('./teacher/videoAdd')
+const videoUpdate = require('./teacher/videoUpdate')
+const videoGet = require('./teacher/videoGet')
+const videoDelete = require('./teacher/videoDelete')
+const publishCourseInfoGet = require('./teacher/publishCourseInfoGet')
+const coursePublish = require('./teacher/coursePublish')
+const listCourseGet = require('./teacher/listCourseGet')
+const sourseAdd=require('./teacher/sourseAdd')
+const courseDelete=require('./teacher/courseDelete')
 
 const mocks = [
+  
   ...user,
-  ...table
+  ...table,
+  ...teacher,
+  ...teacherAdd,
+  ...teacherInfoGet,
+  ...teacherUpdate,
+  ...avater,
+  ...subjectAdd,
+  ...subjectListGet,
+  ...courseInfoAdd,
+  ...courseInfoUpdate,
+  ...findAll,
+  ...allChapterVideoGet,
+  ...courseInfoIdGet,
+  ...chapterAdd,
+  ...chapterGet,
+  ...chapterUpdate,
+  ...chapterDelete,
+  ...videoAdd,
+  ...videoUpdate,
+  ...videoGet,
+  ...videoDelete,
+  ...publishCourseInfoGet,
+  ...coursePublish,
+  ...listCourseGet,
+  ...sourseAdd,
+  ...courseDelete
 ]
 
 // for front mock

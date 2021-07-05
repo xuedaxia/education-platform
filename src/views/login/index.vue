@@ -3,9 +3,15 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">在线教育平台</h3>
       </div>
-
+      <el-form-item prop="role">     
+        <el-radio-group v-model="loginForm.role" style="margin-left:150px">
+        <el-radio :label="0">教师</el-radio>
+        <el-radio :label="1">学生</el-radio>
+        
+     </el-radio-group>
+      </el-form-item>
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user" />
@@ -41,12 +47,13 @@
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-
-      <div class="tips">
+      <el-button :loading="loading" type="primary" style="width:60%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
+      <el-button  type="success" style="width:30%;margin-bottom:30px;margin-left:40px;" @click.native.prevent="handleRegister">注册</el-button>
+     
+      <!-- <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
         <span> password: any</span>
-      </div>
+      </div> -->
 
     </el-form>
   </div>
@@ -60,30 +67,45 @@ export default {
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+        callback(new Error('请输入正确的用户名!'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
-      } else {
+        callback(new Error('密码不得少于6位!'))
+      } 
+      else {
         callback()
+      }
+    }
+    const validateConfirm = (rule, value, callback) => {
+      if (this.loginForm.password === this.loginForm.confirm) {
+        
+        callback()
+      } else {
+        callback(new Error('两次密码不一致！'))
       }
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        role:0,
+        username: 'sa20225555',
+        password: '111111',
+        
       },
-      loginRules: {
+      loginRules: {        
+        role:[{required: true}],
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }],
+        confirm: [{ required: true, trigger: 'blur', validator: validateConfirm }],
+
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: undefined,
+      
     }
   },
   watch: {
@@ -109,10 +131,14 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+          this.loginForm.role=(this.loginForm.role=="0")?"teacher":"student"
+          console.log(this.loginForm.role);
           this.$store.dispatch('user/login', this.loginForm).then(() => {
+            
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
           }).catch(() => {
+            this.loginForm.role=0
             this.loading = false
           })
         } else {
@@ -120,7 +146,12 @@ export default {
           return false
         }
       })
+    },
+    handleRegister() {
+              
+    this.$router.push({ path:'/register' })
     }
+    
   }
 }
 </script>
